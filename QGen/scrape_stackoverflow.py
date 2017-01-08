@@ -3,16 +3,14 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *  
 from PyQt4.QtWebKit import *
 from bs4 import BeautifulSoup
-import argparse
-import re
+# import argparse
 import unicodedata
 import time
 from pymongo import MongoClient
-from rq import Queue
 import urllib
 # import tldextract
 
-client = MongoClient()
+client = MongoClient("mongodb://localhost:27017/comcast")
 db = client.comcast
   
 class Render(QWebPage):
@@ -38,12 +36,26 @@ class Render(QWebPage):
 				source = link.get('href')
 				print eachlink
 				print str(source)
+				insert_db(eachlink, str(source))
 		
+def insert_db(title, url):
+	try:
+		db.question_index.insert_one({"title":title, "url":url})
+	except Exception, e:
+		print "[x]"
+		pass
+	else:
+		print "title : " + title
+		print "URL : " + url
+	finally:
+		print '-+-+-+-+-+-+-+-+-'
+		# Run each URL in threads
+		time.sleep(0.2)
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--search', help='Enter the search term')
-    return parser.parse_args()
+# def parse_args():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('-s', '--search', help='Enter the search term')
+#     return parser.parse_args()
 
 def main():
 	pg = sys.argv[2]

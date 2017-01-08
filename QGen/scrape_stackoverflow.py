@@ -12,7 +12,7 @@ from rq import Queue
 import urllib
 # import tldextract
 
-client = MongoClient("mongodb://35.160.155.175:27017/comcast")
+client = MongoClient()
 db = client.comcast
   
 class Render(QWebPage):
@@ -33,18 +33,11 @@ class Render(QWebPage):
 		# texts = soup.findAll(text=True)
 		title = str(soup.title.text.encode('utf-8'))
 		
-		for summary in soup.find_all('div', {'class': 'question-summary'}):
-			for eachsum in summary:
-				for link in soup.find_all('a', {'class': 'question-hyperlink'}):
-					for eachlink in link:
-						source = link.get('href')
-						print eachlink
-						# print str(source)
-						print '-+-+-+-+-+-+-+-+-+-+-+-+-'
-				# for tags in soup.find_all('a', {'class': 'post-tag'}):
-				# 	for eachtag in tags:
-				# 		print eachtag
-				# insert_db(eachlink, str(source))
+		for link in soup.find_all('a', {'class': 'question-hyperlink'}):
+			for eachlink in link:
+				source = link.get('href')
+				print eachlink
+				print str(source)
 		
 
 def parse_args():

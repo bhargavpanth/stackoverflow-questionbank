@@ -53,8 +53,8 @@ app.use(errorHandler);
 if (process.env.PORT) {
     console.log('No remote set up');
 } else {
-    mongoose.connect('mongodb://localhost:27017/servicex');
-    console.log('connected to servicex');
+    mongoose.connect('mongodb://localhost:27017/comcast');
+    console.log('connected to comcast');
 }
 
 

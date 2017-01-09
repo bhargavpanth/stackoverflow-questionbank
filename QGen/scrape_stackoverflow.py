@@ -36,17 +36,18 @@ class Render(QWebPage):
 				source = link.get('href')
 				print eachlink
 				print str(source)
-				insert_db(eachlink, str(source))
+				insert_db(eachlink, str(source), sys.argv[1])
 		
-def insert_db(title, url):
+def insert_db(title, url, tag):
 	try:
-		db.question_index.insert_one({"title":title, "url":url})
+		db.question_index.insert_one({"title":title, "url":url, "tag":tag})
 	except Exception, e:
 		print "[x]"
 		pass
 	else:
 		print "title : " + title
 		print "URL : " + url
+		print "Tag : " + tag
 	finally:
 		print '-+-+-+-+-+-+-+-+-'
 		# Run each URL in threads

@@ -1,5 +1,5 @@
 node_modules
-vh-beta.pem
+*.pem
 node_modules
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

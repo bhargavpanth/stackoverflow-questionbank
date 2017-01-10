@@ -32,11 +32,11 @@ class Render(QWebPage):
 		title = str(soup.title.text.encode('utf-8'))
 		div = soup.find('div', {'class': 'post-text'})
 		child = div.findChildren()
-		# for eachchild in child:
-			# print eachchild.text
-		question = soup.find('p')
-		for eachq in question:
-			print eachq
+		for eachchild in child:
+			print eachchild.text
+		# question = soup.find('p')
+		# for eachq in question:
+		# 	print eachq
 		
 def insert_db(title, url, tag):
 	try:

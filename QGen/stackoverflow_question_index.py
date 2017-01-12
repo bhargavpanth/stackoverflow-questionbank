@@ -36,11 +36,12 @@ class Render(QWebPage):
 				source = link.get('href')
 				print eachlink
 				print str(source)
-				insert_db(eachlink, str(source), sys.argv[1])
+				print '-+-+-+-+-+-+-+-+-+-+-'
+				# insert_db(eachlink, str(source), sys.argv[1], url)
 		
-def insert_db(title, url, tag):
+def insert_db(title, url, tag, src):
 	try:
-		db.question_index.insert_one({"title":title, "url":url, "tag":tag})
+		db.question_index.insert_one({"title":title, "url":url, "tag":tag, "source":src})
 	except Exception, e:
 		print "[x]"
 		pass
@@ -62,11 +63,12 @@ def main():
 	pg = sys.argv[2]
 	tag = sys.argv[1]
 	# tag = (urllib.quote(sys.argv[1])).lower()
-	url = "http://stackoverflow.com/questions/tagged/"+tag+"?page="+pg+"&sort=oldest&pagesize=15"
-	print url
-	r = Render(url)
-	html = r.frame.toHtml()
-	src = unicode(html)
-	rq = r.parse_required(src, url)
+	for eachpg in range(int(pg), 0, -1):
+		url = "http://stackoverflow.com/questions/tagged/"+tag+"?page="+str(eachpg)+"&sort=oldest&pagesize=15"
+		print url
+		r = Render(url)
+		html = r.frame.toHtml()
+		src = unicode(html)
+		rq = r.parse_required(src, url)
 
 main()

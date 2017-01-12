@@ -1,3 +1,4 @@
 module.exports = {
-	user: require('./User.js')
+	user: require('./User.js'),
+	question: require('./Question.js')
 };

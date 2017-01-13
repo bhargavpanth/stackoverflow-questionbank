@@ -10,6 +10,8 @@ from pymongo import MongoClient
 import urllib
 # import tldextract
 
+## Popularity based ranking - Priority
+
 client = MongoClient("mongodb://localhost:27017/comcast")
 db = client.comcast
   

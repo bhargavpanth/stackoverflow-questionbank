@@ -33,12 +33,26 @@ class Render(QWebPage):
 		# texts = soup.findAll(text=True)
 		title = str(soup.title.text.encode('utf-8'))
 		
-		for link in soup.find_all('a', {'class': 'question-hyperlink'}):
-			for eachlink in link:
-				source = link.get('href')
-				print eachlink
-				print str(source)
-				print '-+-+-+-+-+-+-+-+-+-+-'
+		question = soup.find('div', {'id': 'questions'})
+		
+		# for eachquestion in question:
+		eachq = soup.find('a', {'class': 'question-hyperlink'})
+		source = eachq.get('href')
+		print source
+		print eachq.text
+			# tags = soup.find('div', {'class': re.compile("^tags")})
+		summary = soup.find('div', {'class': 'excerpt'})
+		print summary.text
+			# for eachtag in tags:
+			# 	t = soup.find('a', {'class': 'post-tag'})
+			# 	for eacht in t:
+			# 		print eacht
+		print '-+-+-+-+-+-+-'
+		
+		# 	for eachlink in link:
+		# 		print eachlink
+		# 		print str(source)
+		# 		print '-+-+-+-+-+-+-+-+-+-+-'
 				# insert_db(eachlink, str(source), sys.argv[1], url)
 		
 def insert_db(title, url, tag, src):
@@ -64,6 +78,8 @@ def insert_db(title, url, tag, src):
 def main():
 	pg = sys.argv[2]
 	tag = sys.argv[1]
+	## skill tag
+	## page number
 	# tag = (urllib.quote(sys.argv[1])).lower()
 	url = "http://stackoverflow.com/questions/tagged/"+tag+"?page="+pg+"&sort=oldest&pagesize=15"
 	print url

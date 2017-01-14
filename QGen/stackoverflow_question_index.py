@@ -32,22 +32,21 @@ class Render(QWebPage):
 		soup = BeautifulSoup(source, 'html.parser')
 		# texts = soup.findAll(text=True)
 		title = str(soup.title.text.encode('utf-8'))
-		
-		question = soup.find('div', {'id': 'questions'})
-		
-		# for eachquestion in question:
-		eachq = soup.find('a', {'class': 'question-hyperlink'})
-		source = eachq.get('href')
-		print source
-		print eachq.text
-			# tags = soup.find('div', {'class': re.compile("^tags")})
-		summary = soup.find('div', {'class': 'excerpt'})
-		print summary.text
-			# for eachtag in tags:
-			# 	t = soup.find('a', {'class': 'post-tag'})
-			# 	for eacht in t:
-			# 		print eacht
-		print '-+-+-+-+-+-+-'
+		question = soup.findAll('div', {'id': 'questions'})
+		# Loop through each of the questions
+		for eachq in question:
+			eachq = soup.find('a', {'class': 'question-hyperlink'})
+			source = eachq.get('href')
+			t = soup.findAll('a', {'class': 'post-tag'})
+			summary = soup.find('div', {'class': 'excerpt'})
+			votes = soup.find('span', {'class': 'vote-count-post'})
+			print "Summary : " + summary.text
+			print "URL : " + source
+			print "Question title : " + eachq.text
+			print "Popularity : " + votes.text
+			# for eacht in t:
+			# 	print eacht.text
+			print '-+-+-+-+-+-+-'
 		
 		# 	for eachlink in link:
 		# 		print eachlink

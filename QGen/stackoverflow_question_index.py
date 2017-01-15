@@ -34,20 +34,22 @@ class Render(QWebPage):
 		title = str(soup.title.text.encode('utf-8'))
 		question = soup.find('div', {'id': 'questions'})
 		# Loop through each of the questions
-		# for eachq in question:
-		eachq = soup.find('a', {'class': 'question-hyperlink'})
-		source = eachq.get('href')
-		t = soup.findAll('a', {'class': 'post-tag'})
-		summary = soup.find('div', {'class': 'excerpt'})
-		votes = soup.find('span', {'class': 'vote-count-post'})
-		print "Summary : " + summary.text
-		print "URL : " + source
-		print "Question title : " + eachq.text
-		print "Popularity : " + votes.text
-		# for eacht in t:
-		# 	print eacht.text
-		print '-+-+-+-+-+-+-'
-		# insert_db(eachlink, str(source), sys.argv[1], url)
+		child = question.findChildren()
+		for eachchild in child:
+			print eachchild.text
+			# eachq = soup.find('a', {'class': 'question-hyperlink'})
+			# source = eachq.get('href')
+			# t = soup.findAll('a', {'class': 'post-tag'})
+			# summary = soup.find('div', {'class': 'excerpt'})
+			# votes = soup.find('span', {'class': 'vote-count-post'})
+			# print "Summary : " + summary.text
+			# print "URL : " + source
+			# print "Question title : " + eachq.text
+			# print "Popularity : " + votes.text
+			# for eacht in t:
+			# 	print eacht.text
+			print '-+-+-+-+-+-+-'
+			# insert_db(eachlink, str(source), sys.argv[1], url)
 		
 def insert_db(title, url, tag, src):
 	try:

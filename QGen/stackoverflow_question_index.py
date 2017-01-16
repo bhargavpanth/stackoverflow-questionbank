@@ -35,9 +35,18 @@ class Render(QWebPage):
 		question = soup.find('div', {'id': 'questions'})
 		# Loop through each of the questions
 		child = question.findChildren()
-		for eachchild in child:
-			print eachchild.text
-			# eachq = soup.find('a', {'class': 'question-hyperlink'})
+		# for eachchild in child:
+		# print eachchild.text
+		# for eachQuestion in soup.find_all('div', {'class': 'questions'}):
+		elements = soup.find_all('div', class_= "question-hyperlink question-summary votes views".split())
+		# print("\n".join("{} {}".format(el['class'], el.get_text()) for el in elements))
+		for el in elements:
+			# print format(el.get_text())
+			if el['class'] == 'votes':
+				print format(el.get_text())
+			print format(el['views'], el.get_text())
+			print format(el['question-summary'], el.get_text())
+			print '-+-+-+-+-+-+-'
 			# source = eachq.get('href')
 			# t = soup.findAll('a', {'class': 'post-tag'})
 			# summary = soup.find('div', {'class': 'excerpt'})
@@ -46,9 +55,6 @@ class Render(QWebPage):
 			# print "URL : " + source
 			# print "Question title : " + eachq.text
 			# print "Popularity : " + votes.text
-			# for eacht in t:
-			# 	print eacht.text
-			print '-+-+-+-+-+-+-'
 			# insert_db(eachlink, str(source), sys.argv[1], url)
 		
 def insert_db(title, url, tag, src):

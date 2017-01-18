@@ -30,10 +30,8 @@ class Render(QWebPage):
 
 	def parse_required(self, source, url):
 		soup = BeautifulSoup(source, 'html.parser')
-		# texts = soup.findAll(text=True)
 		title = str(soup.title.text.encode('utf-8'))
 		question = soup.find('div', {'id': 'questions'})
-		# Loop through each of the questions
 		child = question.findChildren()
 		# for eachchild in child:
 		# print eachchild.text
@@ -42,10 +40,10 @@ class Render(QWebPage):
 		# print("\n".join("{} {}".format(el['class'], el.get_text()) for el in elements))
 		for el in elements:
 			# print format(el.get_text())
-			if el['class'] == 'votes':
-				print format(el.get_text())
-			print format(el['views'], el.get_text())
-			print format(el['question-summary'], el.get_text())
+			# if el['class'] == 'votes':
+			# 	print format(el.get_text())
+			# print format(el['views'], el.get_text())
+			# print format(el['question-summary'], el.get_text())
 			print '-+-+-+-+-+-+-'
 			# source = eachq.get('href')
 			# t = soup.findAll('a', {'class': 'post-tag'})

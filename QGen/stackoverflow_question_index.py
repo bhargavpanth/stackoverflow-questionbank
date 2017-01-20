@@ -36,15 +36,24 @@ class Render(QWebPage):
 		# for eachchild in child:
 		# print eachchild.text
 		# for eachQuestion in soup.find_all('div', {'class': 'questions'}):
-		elements = soup.find_all('div', class_= "question-hyperlink question-summary votes views".split())
-		# print("\n".join("{} {}".format(el['class'], el.get_text()) for el in elements))
-		for el in elements:
-			# print format(el.get_text())
+		#  question-hyperlink question-summary votes views
+		questions = soup.find_all('div', {'id': 'questions'})
+		# print("\n".join("{} {}".format(el['class'], el.get_text()) for el in questions))
+		for question in questions:
+			# print question.text
+			eachQuestion = soup.find('div', {'class': 'question-summary'})
+			for quest in eachQuestion:
+				URL = quest.find_all('a')
+				for eachURL in URL:
+					print eachURL
+					print '--++--++--++--'
+
+
 			# if el['class'] == 'votes':
 			# 	print format(el.get_text())
 			# print format(el['views'], el.get_text())
 			# print format(el['question-summary'], el.get_text())
-			print '-+-+-+-+-+-+-'
+			# print '-+-+-+-+-+-+-'
 			# source = eachq.get('href')
 			# t = soup.findAll('a', {'class': 'post-tag'})
 			# summary = soup.find('div', {'class': 'excerpt'})

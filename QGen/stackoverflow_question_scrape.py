@@ -31,9 +31,17 @@ class Render(QWebPage):
 		# texts = soup.findAll(text=True)
 		title = str(soup.title.text.encode('utf-8'))
 		div = soup.find('div', {'class': 'post-text'})
+		tags = soup.find('div', {'class': 'post-taglist'})
+		skill_tag = tags.findChildren()
 		child = div.findChildren()
+		vote = soup.find('span', {'class': 'vote-count-post '})
 		for eachchild in child:
 			print eachchild.text
+		print '-----'
+		for eachtag in skill_tag:
+			print eachtag.text
+		print '-----'
+		print vote.text
 		# question = soup.find('p')
 		# for eachq in question:
 		# 	print eachq
@@ -60,6 +68,7 @@ def insert_db(title, url, tag):
 
 def main():
 	url = sys.argv[1]
+	## pass URL as argument
 	print url
 	r = Render(url)
 	html = r.frame.toHtml()
